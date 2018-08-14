@@ -6,17 +6,20 @@ clients = [
   {
     id: 1,
     name: "bohyeon1",
-    mobile: "01055992807"
+    mobile: "01055992807",
+    active: true
   },
   {
     id: 2,
     name: "bohyeon2",
-    mobile: "01055992807"
+    mobile: "01055992807",
+    active: false
   },
   {
     id: 3,
     name: "bohyeon3",
-    mobile: "01055992807"
+    mobile: "01055992807",
+    active: true
   }
 ];
 

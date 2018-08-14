@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { fetchClients } from "../ducks/clients";
 
-import ClientList from "../components/ClientList";
+import Client from "../components/Client";
 
 function mapStateToProps(state) {
   return {
@@ -21,4 +21,4 @@ function mapDispatchToprops(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToprops
-)(ClientList);
+)(Client);
