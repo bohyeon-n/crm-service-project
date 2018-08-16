@@ -1,7 +1,9 @@
 import React from "react";
 import ClientItem from "../components/ClientItem";
-import { Table, Menu, Button, Search } from "semantic-ui-react";
+import { Segment, Table, Menu, Button, Search } from "semantic-ui-react";
 import ClientList from "./ClientList";
+import AddClient from "./AddClient";
+
 export default class Client extends React.Component {
   static defaultProps = {
     clients: [
@@ -54,12 +56,10 @@ export default class Client extends React.Component {
       const searchClients = [];
       sortedClients.map(client => {
         if (client.name.indexOf(value) >= 0) {
-          console.log(searchClients);
           searchClients.push(client);
         }
       });
       sortedClients = searchClients;
-      console.log(sortedClients);
     }
     return sortedClients;
   };
@@ -82,7 +82,7 @@ export default class Client extends React.Component {
     this.updateClients();
   };
   render() {
-    const { activeItem, value, isLoading } = this.state;
+    const { activeItem, value, isLoading, addClient } = this.state;
     const { errorMsg, loading } = this.props;
     let clients = this.state.clients;
     if (this.state.clients == false && value == "") {
@@ -90,9 +90,12 @@ export default class Client extends React.Component {
     }
     return (
       <React.Fragment>
+        <div className="clients__title">
+          <Segment>CLIENT MANAGEMENT</Segment>
+        </div>
         <div className="clients__tab">
           <div className="clients__tab-header" />
-          <Menu>
+          <Menu pointing>
             <Menu>
               <Menu.Item
                 name="active"
@@ -108,13 +111,13 @@ export default class Client extends React.Component {
               >
                 Former Clients
               </Menu.Item>
-              <Button>+ADD CLIENT</Button>
               <Search
                 loading={isLoading}
                 onSearchChange={this.handleSearchChange}
                 value={value}
                 showNoResults={false}
               />
+              <AddClient />
             </Menu>
           </Menu>
         </div>

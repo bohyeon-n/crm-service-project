@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
     "formik": "^1.0.2",
+    "moment": "^2.22.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",

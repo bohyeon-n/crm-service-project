@@ -1,5 +1,16 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.header {
+  height: 4rem;
 }
+
+.header__content {
+  position: fixed;
+  top: 0;
+  background: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=index.css.map */
