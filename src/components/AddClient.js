@@ -1,13 +1,21 @@
 import React from "react";
 import { Grid, Modal, Button, Menu } from "semantic-ui-react";
-import ClientInfoForm from "./ClientInfoForm";
-import ClientAssessmentsForm from "./ClientAssessmentsForm";
-import ClientNoteForm from "./ClientNoteForm";
 
+import AddClientForm from "./AddClientForm";
 export default class AddClient extends React.Component {
   state = {
     open: false,
-    activeItem: "Info"
+    activeItem: "Info",
+    client: {
+      memo: "",
+      memos: [],
+      name: "",
+      mobile: "",
+      status: "active",
+      goal: "",
+      injuries: "",
+      condition: ""
+    }
   };
   handleItemClick = (e, { name }) => {
     this.setState({
@@ -15,9 +23,27 @@ export default class AddClient extends React.Component {
     });
   };
   close = e => this.setState({ open: false });
+  handleSubmit = e => {
+    this.props.onAddClient(this.state.client);
+    this.close();
+  };
+  onUpdateClient = (name, value) => {
+    this.setState({
+      client: {
+        ...this.state.client,
+        [name]: value
+      }
+    });
+  };
   render() {
-    const { open, closeOnEscape, closeOnDimmerClick, activeItem } = this.state;
-
+    const {
+      open,
+      closeOnEscape,
+      closeOnDimmerClick,
+      activeItem,
+      client
+    } = this.state;
+    const { onAddClient } = this.props;
     return (
       <Modal
         size="large"
@@ -51,13 +77,11 @@ export default class AddClient extends React.Component {
               </Menu>
             </Grid.Column>
             <Grid.Column width={12}>
-              {activeItem === "Info" ? (
-                <ClientInfoForm />
-              ) : activeItem === "Assessments" ? (
-                <ClientAssessmentsForm />
-              ) : (
-                <ClientNoteForm />
-              )}
+              <AddClientForm
+                memos={client.memos}
+                activeItem={activeItem}
+                handleClientUpdate={this.onUpdateClient}
+              />
             </Grid.Column>
           </Grid>
         </Modal.Content>
@@ -66,7 +90,7 @@ export default class AddClient extends React.Component {
             close
           </Button>
           <Button
-            onClick={this.close}
+            onClick={this.handleSubmit}
             positive
             labelPosition="right"
             icon="checkmark"

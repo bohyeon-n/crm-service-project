@@ -1,40 +1,26 @@
 const FETCH_CLIENTS_REQUEST = "service/clients/FETCH_CLIENTS_REQUEST";
 const FETCH_CLIENTS_SUCCESS = "service/clients/FETCH_CLIENTS_SUCCESS";
 const FETCH_CLIENTS_FAILURE = "service/clients/FETCH_CLIENTS_FAILURE";
+const ADD_CLIENTS_REQUEST = "service/clients/ADD_CLIENTS_REQUEST";
+const ADD_CLIENTS_SUCCESS = "service/clients/ADD_CLIENTS_SUCCESS";
+const ADD_CLIENTS_FAILURE = "service/clients/ADD_CLIENTS_FAILURE";
 // mockup
+let count = 2;
 clients = [
   {
     id: 1,
     name: "bohyeon1",
     mobile: "01055992807",
-    active: true
+    status: "active"
   },
   {
     id: 2,
     name: "sewoon123",
     mobile: "01055992807",
-    active: false
-  },
-  {
-    id: 3,
-    name: "asdfghlkjem",
-    mobile: "01055992807",
-    active: false
-  },
-  {
-    id: 4,
-    name: "koo jahyeon",
-    mobile: "01055992807",
-    active: true
-  },
-  {
-    id: 5,
-    name: "jahyeon 3 koo",
-    mobile: "01055992807",
-    active: true
+    status: "former"
   }
 ];
-
+// fetchClients
 export function fetchClientsRequest() {
   return {
     type: FETCH_CLIENTS_REQUEST
@@ -53,7 +39,23 @@ export function fetchClientsFailure(errorMsg) {
     errorMsg
   };
 }
-
+// add clinets
+export function addClientRequest() {
+  return {
+    type: FETCH_CLIENTS_REQUEST
+  };
+}
+export function addClientSuccess() {
+  return {
+    type: ADD_CLIENTS_SUCCESS
+  };
+}
+export function addClientFailure(errorMsg) {
+  return {
+    type: ADD_CLIENTS_FAILURE,
+    errorMsg
+  };
+}
 export function fetchClients() {
   return function(dispatch) {
     // 통신 보내기
@@ -61,21 +63,22 @@ export function fetchClients() {
     dispatch(fetchClientsSuccess(res));
   };
 }
-
+export function addClient(client) {
+  // request
+  return function(dispatch) {
+    dispatch(addClientRequest());
+    clients = [...clients, client];
+    dispatch(addClientSuccess());
+    dispatch(fetchClients());
+  };
+}
 const initialState = {
-  items: [
-    {
-      id: 2,
-      name: "bohyeon0",
-      mobile: "01033444"
-    }
-  ],
+  items: [],
   loading: false,
   errorMsg: null
 };
 
 export default function clients(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case FETCH_CLIENTS_REQUEST:
       return {
@@ -93,6 +96,22 @@ export default function clients(state = initialState, action) {
         ...state,
         loading: false,
         items: action.clients
+      };
+    case ADD_CLIENTS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case ADD_CLIENTS_SUCCESS:
+      return {
+        loading: false,
+        ...state
+      };
+    case ADD_CLIENTS_FAILURE:
+      return {
+        loading: false,
+        ...state,
+        errorMsg: action.errorMsg
       };
     default:
       return state;

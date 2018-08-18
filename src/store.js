@@ -3,6 +3,7 @@ import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import clients from "./ducks/clients";
 import schedules from "./ducks/schedules";
+
 const loggerMiddleware = createLogger();
 
 const rootReducer = combineReducers({

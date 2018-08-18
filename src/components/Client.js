@@ -2,7 +2,7 @@ import React from "react";
 import ClientItem from "../components/ClientItem";
 import { Segment, Table, Menu, Button, Search } from "semantic-ui-react";
 import ClientList from "./ClientList";
-import AddClient from "./AddClient";
+import AddClientContainer from "../containers/AddClientContainer";
 
 export default class Client extends React.Component {
   static defaultProps = {
@@ -40,9 +40,10 @@ export default class Client extends React.Component {
   };
   sortClients = (clients = [], activeItem, value) => {
     let sortedClients = [];
+
     activeItem === "active"
       ? clients.map(client => {
-          if (client.active) {
+          if (client.status === "active") {
             sortedClients.push(client);
           }
         })
@@ -82,8 +83,8 @@ export default class Client extends React.Component {
     this.updateClients();
   };
   render() {
-    const { activeItem, value, isLoading, addClient } = this.state;
-    const { errorMsg, loading } = this.props;
+    const { activeItem, value, isLoading } = this.state;
+    const { errorMsg, loading, addClient } = this.props;
     let clients = this.state.clients;
     if (this.state.clients == false && value == "") {
       clients = this.sortClients(this.props.clients, activeItem);
@@ -117,7 +118,7 @@ export default class Client extends React.Component {
                 value={value}
                 showNoResults={false}
               />
-              <AddClient />
+              <AddClientContainer />
             </Menu>
           </Menu>
         </div>
