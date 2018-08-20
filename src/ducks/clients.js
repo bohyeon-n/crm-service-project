@@ -11,13 +11,17 @@ clients = [
     id: 1,
     name: "bohyeon1",
     mobile: "01055992807",
-    status: "active"
+    status: "active",
+    trainnerId: 1,
+    count: 10
   },
   {
     id: 2,
     name: "sewoon123",
     mobile: "01055992807",
-    status: "former"
+    status: "former",
+    trainnerId: 2,
+    count: 10
   }
 ];
 // fetchClients

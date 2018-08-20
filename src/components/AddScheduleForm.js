@@ -6,12 +6,6 @@ import TimePicker from "rc-time-picker";
 
 const format = "h:mm a";
 
-const trainners = [
-  { name: "trainner1" },
-  { name: "trainner2" },
-  { name: "trainner3" }
-];
-
 export default class AddScheduleForm extends React.Component {
   state = {
     client: "",
@@ -36,7 +30,7 @@ export default class AddScheduleForm extends React.Component {
     });
   };
   handleSubmit = async e => {
-    const { onAddSchedule } = this.props;
+    const { onAddSchedule, trainners, clients } = this.props;
     let time = this.state.time || this.props.start;
     let start = this.state.start || this.props.start;
     const date = moment(start).set({
@@ -49,7 +43,7 @@ export default class AddScheduleForm extends React.Component {
       date: date
     });
     const trainner = this.state.trainner || trainners[0];
-    const client = this.state.client || this.props.clients[0];
+    const client = this.state.client || clients[0];
     const schedule = {
       client: client.name,
       trainner: trainner.name,
@@ -63,7 +57,7 @@ export default class AddScheduleForm extends React.Component {
     onAddSchedule(schedule);
   };
   render() {
-    const { close, open, clients } = this.props;
+    const { close, open, clients, trainners } = this.props;
     const start = this.state.start || this.props.start;
     const end = this.state.end || this.props.end;
     const now = moment(start);
@@ -95,7 +89,7 @@ export default class AddScheduleForm extends React.Component {
             >
               {clients.map(client => (
                 <option key={client.id} value={client.name}>
-                  {client.name}
+                  {client.name} / {client.count}
                 </option>
               ))}
             </Form.Field>

@@ -3,12 +3,13 @@ import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import clients from "./ducks/clients";
 import schedules from "./ducks/schedules";
-
+import trainners from "./ducks/trainners";
 const loggerMiddleware = createLogger();
 
 const rootReducer = combineReducers({
   clients,
-  schedules
+  schedules,
+  trainners
 });
 
 export const store = createStore(
