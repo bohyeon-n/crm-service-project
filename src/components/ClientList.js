@@ -23,8 +23,8 @@ export default class ClientList extends React.Component {
             <div>{errorMsg}</div>
           ) : clients.length > 0 ? (
             clients.map(({ id, name, mobile }) => (
-              <Table.Body>
-                <ClientItem key={id} id={id} name={name} mobile={mobile} />
+              <Table.Body key={id}>
+                <ClientItem id={id} name={name} mobile={mobile} />
               </Table.Body>
             ))
           ) : (

@@ -9,9 +9,9 @@ const schedulesList = [
   {
     id: 0,
     title: "test",
-    allDay: true,
-    start: new Date(2018, 7, 17),
-    end: new Date(2018, 7, 18),
+    allDay: false,
+    start: new Date(2018, 7, 10, 16, 0, 0, 0),
+    end: new Date(2018, 7, 10, 18, 0, 0, 0),
     desc: "test desc"
   },
   {
@@ -20,6 +20,14 @@ const schedulesList = [
     allDay: true,
     start: new Date(2018, 7, 1),
     end: new Date(2018, 7, 2),
+    desc: "test desc2"
+  },
+  {
+    id: 1,
+    title: "test2",
+    allDay: false,
+    start: new Date("Sun Aug 19 2018 02:42:13 GMT+0900"),
+    end: new Date("Sun Aug 19 2018 02:42:13 GMT+0900"),
     desc: "test desc2"
   }
 ];

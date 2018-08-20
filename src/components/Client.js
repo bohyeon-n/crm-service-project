@@ -48,7 +48,7 @@ export default class Client extends React.Component {
           }
         })
       : clients.map(client => {
-          if (!client.active) {
+          if (client.status === "former") {
             sortedClients.push(client);
           }
         });
