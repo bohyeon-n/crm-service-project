@@ -6,6 +6,12 @@ import TimePicker from "rc-time-picker";
 
 const format = "h:mm a";
 
+const trainners = [
+  { name: "trainner1" },
+  { name: "trainner2" },
+  { name: "trainner3" }
+];
+
 export default class AddScheduleForm extends React.Component {
   state = {
     client: "",
@@ -30,31 +36,38 @@ export default class AddScheduleForm extends React.Component {
     });
   };
   handleSubmit = async e => {
-    let { time } = this.state;
+    const { onAddSchedule } = this.props;
+    let time = this.state.time || this.props.start;
     let start = this.state.start || this.props.start;
     const date = moment(start).set({
       hours: moment(time).format("H"),
-      minutes: moment(time).format("mm")
+      minutes: moment(time).format("mm"),
+      second: moment(0).format("ss")
     });
 
     await this.setState({
       date: date
     });
-
-    console.log(moment(this.state.date).format());
+    const trainner = this.state.trainner || trainners[0];
+    const client = this.state.client || this.props.clients[0];
+    const schedule = {
+      client: client.name,
+      trainner: trainner.name,
+      start: moment(date).toDate(),
+      end: moment(date)
+        .add(1, "hours")
+        .toDate(),
+      allDay: false,
+      title: client.name
+    };
+    onAddSchedule(schedule);
   };
   render() {
     const { close, open, clients } = this.props;
     const start = this.state.start || this.props.start;
     const end = this.state.end || this.props.end;
-    const now = moment(start)
-      .hour(0)
-      .minute(0);
-    const trainners = [
-      { name: "trainner1" },
-      { name: "trainner2" },
-      { name: "trainner3" }
-    ];
+    const now = moment(start);
+    const { trainner, client } = this.state;
     return (
       <Modal open={open} onClose={close}>
         <Modal.Header>ADD SCHEDULE</Modal.Header>
@@ -66,7 +79,7 @@ export default class AddScheduleForm extends React.Component {
               control="select"
               name="trainner"
               onChange={this.handleChange}
-              value={this.state.trainner}
+              value={trainner}
             >
               {trainners.map(trainner => (
                 <option value={trainner.name}>{trainner.name}</option>
@@ -78,7 +91,7 @@ export default class AddScheduleForm extends React.Component {
               control="select"
               name="client"
               onChange={this.handleChange}
-              value={this.state.client}
+              value={client}
             >
               {clients.map(client => (
                 <option key={client.id} value={client.name}>
@@ -100,7 +113,7 @@ export default class AddScheduleForm extends React.Component {
                 format={format}
                 defaultValue={now}
                 showSecond={false}
-                minuteStep={10}
+                minuteStep={30}
                 use12Hours
                 inputReadOnly
                 className="time-picker"
