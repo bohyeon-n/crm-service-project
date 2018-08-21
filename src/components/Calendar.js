@@ -1,18 +1,50 @@
 import React from "react";
 import BigCalendar from "react-big-calendar";
-import moment from "moment";
-import { Segment } from "semantic-ui-react";
 
+import { Segment, Modal, Popup, Icon } from "semantic-ui-react";
+import moment from "moment";
 import AddScheduleContainer from "../containers/AddScheduleContainer";
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 BigCalendar.momentLocalizer(moment);
+
+class Event extends React.Component {
+  state = {
+    open: false
+  };
+  render() {
+    const { event } = this.props;
+    return (
+      <div className="calendar__event-popup">
+        <Popup trigger={<div>{event.title}</div>} on="click">
+          <Popup.Header>{event.title}</Popup.Header>
+          <Popup.Content className="calendar__evnet-popup">
+            <div>
+              client:
+              {event.client}
+            </div>
+            <div>
+              trainer:
+              {event.client}
+            </div>
+            <div>
+              시간:
+              {moment(event.start).format()}
+            </div>
+          </Popup.Content>
+        </Popup>
+      </div>
+    );
+  }
+}
 
 export default class Calendar extends React.Component {
   state = {
     active: false,
     start: "",
-    end: ""
+    end: "",
+    isSelectEventOpen: false
   };
+
   handleSelect = async ({ start, end }) => {
     await this.setState({
       start: start,
@@ -44,11 +76,13 @@ export default class Calendar extends React.Component {
         </div>
         <div style={{ height: "80vh" }}>
           <BigCalendar
+            popup={true}
             selectable
-            onSelectEvent={event => alert(event.title)}
+            onSelectEvent={this.toggleEventModal}
             events={myEventList}
             onSelectSlot={this.handleSelect}
             views={["month", "week", "day"]}
+            components={{ event: Event }}
           />
         </div>
       </React.Fragment>

@@ -36,4 +36,9 @@
   overflow: hidden;
   height: 100%;
 }
+
+.calendar__event-popup {
+  z-index: 100000;
+  color: red;
+}
 /*# sourceMappingURL=index.css.map */

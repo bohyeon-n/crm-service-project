@@ -15,7 +15,9 @@ let schedulesList = [
     allDay: false,
     start: new Date(2018, 7, 10, 16, 0, 0, 0),
     end: new Date(2018, 7, 10, 18, 0, 0, 0),
-    desc: "test desc"
+    desc: "test desc",
+    client: "아무개",
+    trainer: "아무개 트레이너"
   },
   {
     id: 1,
@@ -23,15 +25,19 @@ let schedulesList = [
     allDay: true,
     start: new Date(2018, 7, 1),
     end: new Date(2018, 7, 2),
-    desc: "test desc2"
+    desc: "test desc2",
+    client: "아무개",
+    trainer: "아무개 트레이너"
   },
   {
-    id: 1,
+    id: 2,
     title: "test2",
     allDay: false,
     start: new Date("Sun Aug 19 2018 02:42:13 GMT+0900"),
     end: new Date("Sun Aug 19 2018 02:42:13 GMT+0900"),
-    desc: "test desc2"
+    desc: "test desc2",
+    client: "아무개",
+    trainer: "아무개 트레이너"
   }
 ];
 // FETCH SHEDULE ACTION

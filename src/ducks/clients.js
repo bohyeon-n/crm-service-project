@@ -12,7 +12,7 @@ clients = [
     name: "bohyeon1",
     mobile: "01055992807",
     status: "active",
-    trainnerId: 1,
+    trainerId: 1,
     count: 10
   },
   {
@@ -20,7 +20,7 @@ clients = [
     name: "sewoon123",
     mobile: "01055992807",
     status: "former",
-    trainnerId: 2,
+    trainerId: 2,
     count: 10
   }
 ];

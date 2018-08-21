@@ -9,7 +9,7 @@ const format = "h:mm a";
 export default class AddScheduleForm extends React.Component {
   state = {
     client: "",
-    trainner: ""
+    trainer: ""
   };
   componentDidMount() {
     this.props.onMount && this.props.onMount();
@@ -30,7 +30,7 @@ export default class AddScheduleForm extends React.Component {
     });
   };
   handleSubmit = async e => {
-    const { onAddSchedule, trainners, clients } = this.props;
+    const { onAddSchedule, trainers, clients } = this.props;
     let time = this.state.time || this.props.start;
     let start = this.state.start || this.props.start;
     const date = moment(start).set({
@@ -42,26 +42,26 @@ export default class AddScheduleForm extends React.Component {
     await this.setState({
       date: date
     });
-    const trainner = this.state.trainner || trainners[0];
-    const client = this.state.client || clients[0];
+    const trainer = this.state.trainer || trainers[0].name;
+    const client = this.state.client || clients[0].name;
     const schedule = {
-      client: client.name,
-      trainner: trainner.name,
+      client: client,
+      trainer: trainer,
       start: moment(date).toDate(),
       end: moment(date)
         .add(1, "hours")
         .toDate(),
       allDay: false,
-      title: client.name
+      title: `${client} /${trainer}`
     };
     onAddSchedule(schedule);
   };
   render() {
-    const { close, open, clients, trainners } = this.props;
+    const { close, open, clients, trainers } = this.props;
     const start = this.state.start || this.props.start;
     const end = this.state.end || this.props.end;
     const now = moment(start);
-    const { trainner, client } = this.state;
+    const { trainer, client } = this.state;
     return (
       <Modal open={open} onClose={close}>
         <Modal.Header>ADD SCHEDULE</Modal.Header>
@@ -69,14 +69,14 @@ export default class AddScheduleForm extends React.Component {
           <Form>
             <Form.Field
               width={5}
-              label="select trainner"
+              label="select trainer"
               control="select"
-              name="trainner"
+              name="trainer"
               onChange={this.handleChange}
-              value={trainner}
+              value={trainer}
             >
-              {trainners.map(trainner => (
-                <option value={trainner.name}>{trainner.name}</option>
+              {trainers.map(trainer => (
+                <option value={trainer.name}>{trainer.name}</option>
               ))}
             </Form.Field>
             <Form.Field
