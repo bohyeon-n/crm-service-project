@@ -16,7 +16,6 @@ const date = moment().format("MMM Do YYYY");
 export default class AddClientForm extends React.Component {
   handleChange = (e, { name, value }) => {
     const { handleClientUpdate } = this.props;
-    console.log(name, value);
     handleClientUpdate(name, value);
   };
   render() {
@@ -32,7 +31,7 @@ export default class AddClientForm extends React.Component {
       condition,
       trainer,
       trainingCount
-    } = this.props;
+    } = this.props.client;
 
     const trainers = this.props.trainers || [];
     return activeItem === "Info" ? (

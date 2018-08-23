@@ -19,6 +19,21 @@ export default class AddClient extends React.Component {
       trainingCount: 10
     }
   };
+  autoHypenPhone = str => {
+    str = str.replace(/[^0-9]/g, "");
+    const length = str.length;
+    if (length < 4) {
+      return str;
+    } else if (length < 7) {
+      return str.substr(0, 3) + "-" + str.substr(3);
+    } else if (length < 11) {
+      return str.substr(0, 3) + "-" + str.substr(3, 3) + "-" + str.substr(6);
+    } else {
+      return str.substr(0, 3) + "-" + str.substr(3, 4) + "-" + str.substr(7);
+    }
+    return str;
+  };
+
   handleItemClick = (e, { name }) => {
     this.setState({
       activeItem: name
@@ -47,6 +62,10 @@ export default class AddClient extends React.Component {
     }
   };
   onUpdateClient = (name, value) => {
+    if (name === "mobile") {
+      value = this.autoHypenPhone(value);
+    }
+    console.log(value);
     this.setState({
       client: {
         ...this.state.client,
@@ -102,6 +121,7 @@ export default class AddClient extends React.Component {
             </Grid.Column>
             <Grid.Column width={12}>
               <AddClientForm
+                client={this.state.client}
                 trainers={trainers}
                 memos={client.memos}
                 activeItem={activeItem}
