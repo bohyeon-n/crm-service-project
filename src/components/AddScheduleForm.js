@@ -89,7 +89,7 @@ export default class AddScheduleForm extends React.Component {
             >
               {clients.map(client => (
                 <option key={client.id} value={client.name}>
-                  {client.name} / {client.count}
+                  {client.name} / {client.trainingCount}
                 </option>
               ))}
             </Form.Field>

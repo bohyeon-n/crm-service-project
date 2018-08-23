@@ -1,15 +1,22 @@
 import React from "react";
 import { Button, Form, Header, List } from "semantic-ui-react";
 import moment from "moment";
-const options = [
+const statusOptions = [
   { key: "active", text: "Active Client", value: "active" },
   { key: "former", text: "Former Client", value: "former" }
+];
+const trainingCountOptions = [
+  { key: 10, text: "10", value: 10 },
+  { key: 20, text: "20", value: 20 },
+  { key: 30, text: "30", value: 30 },
+  { key: 50, text: "50", value: 50 },
+  { key: 100, text: "100", value: 100 }
 ];
 const date = moment().format("MMM Do YYYY");
 export default class AddClientForm extends React.Component {
   handleChange = (e, { name, value }) => {
     const { handleClientUpdate } = this.props;
-
+    console.log(name, value);
     handleClientUpdate(name, value);
   };
   render() {
@@ -22,9 +29,12 @@ export default class AddClientForm extends React.Component {
       status,
       goal,
       injuries,
-      condition
+      condition,
+      trainer,
+      trainingCount
     } = this.props;
 
+    const trainers = this.props.trainers || [];
     return activeItem === "Info" ? (
       <React.Fragment>
         <Header as="h4" block>
@@ -32,6 +42,7 @@ export default class AddClientForm extends React.Component {
         </Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
+            required
             label="Name"
             placeholder="Name"
             name="name"
@@ -40,6 +51,7 @@ export default class AddClientForm extends React.Component {
           />
 
           <Form.Input
+            required
             label="Mobile"
             placeholder="Mobile"
             name="mobile"
@@ -51,8 +63,33 @@ export default class AddClientForm extends React.Component {
             name="status"
             label="Client Status"
             placeholder="Client Status"
-            options={options}
+            options={statusOptions}
             value={status}
+            onChange={this.handleChange}
+          />
+          <Form.Field
+            name="trainer"
+            label="Select Trainer"
+            value={trainer}
+            control="select"
+            onChange={e => {
+              const params = { name: e.target.name, value: e.target.value };
+              this.handleChange(e, params);
+            }}
+          >
+            {trainers.map(trainer => (
+              <option key={trainer.id} value={trainer.name}>
+                {trainer.name}
+              </option>
+            ))}
+          </Form.Field>
+          <Form.Select
+            label="트레이닝 횟수선택"
+            type="number"
+            options={trainingCountOptions}
+            value={trainingCount}
+            placeholder="Number of training"
+            name="trainingCount"
             onChange={this.handleChange}
           />
         </Form>
@@ -67,7 +104,6 @@ export default class AddClientForm extends React.Component {
             label="Goal"
             name="goal"
             value={goal}
-            w
             onChange={this.handleChange}
           />
           <Form.TextArea

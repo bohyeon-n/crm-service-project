@@ -14,7 +14,9 @@ export default class AddClient extends React.Component {
       status: "active",
       goal: "",
       injuries: "",
-      condition: ""
+      condition: "",
+      trainer: "",
+      trainingCount: 10
     }
   };
   handleItemClick = (e, { name }) => {
@@ -23,18 +25,39 @@ export default class AddClient extends React.Component {
     });
   };
   close = e => this.setState({ open: false });
-  handleSubmit = e => {
-    this.props.onAddClient(this.state.client);
-    this.close();
+  handleSubmit = async e => {
+    if (!this.state.client.trainer) {
+      await this.setState({
+        client: {
+          ...this.state.client,
+          trainer: this.props.trainers[0].name
+        }
+      });
+    }
+    if (!this.state.client.name || !this.state.client.mobile) {
+      alert("필수 항목을 확인해주세요");
+      if (this.state.activeItem !== "Info") {
+        this.setState({
+          activeItem: "Info"
+        });
+      }
+    } else {
+      this.props.onAddClient(this.state.client);
+      this.close();
+    }
   };
   onUpdateClient = (name, value) => {
     this.setState({
       client: {
         ...this.state.client,
+
         [name]: value
       }
     });
   };
+  componentDidMount() {
+    this.props.onMount && this.props.onMount();
+  }
   render() {
     const {
       open,
@@ -43,7 +66,8 @@ export default class AddClient extends React.Component {
       activeItem,
       client
     } = this.state;
-    const { onAddClient } = this.props;
+    const { onAddClient, trainers } = this.props;
+
     return (
       <Modal
         size="large"
@@ -55,7 +79,7 @@ export default class AddClient extends React.Component {
         }
       >
         <Modal.Header>ADD CLIENT</Modal.Header>
-        <Modal.Content style={{ height: "80vh" }}>
+        <Modal.Content style={{ height: "80vh" }} scrolling>
           <Grid>
             <Grid.Column width={4}>
               <Menu pointing vertical fluid>
@@ -78,9 +102,11 @@ export default class AddClient extends React.Component {
             </Grid.Column>
             <Grid.Column width={12}>
               <AddClientForm
+                trainers={trainers}
                 memos={client.memos}
                 activeItem={activeItem}
                 handleClientUpdate={this.onUpdateClient}
+                trainingCount={this.state.trainingCount}
               />
             </Grid.Column>
           </Grid>
@@ -89,13 +115,7 @@ export default class AddClient extends React.Component {
           <Button onClick={this.close} negative>
             close
           </Button>
-          <Button
-            onClick={this.handleSubmit}
-            positive
-            labelPosition="right"
-            icon="checkmark"
-            content="Yes"
-          >
+          <Button onClick={this.handleSubmit} positive labelPosition="right">
             Add Client
           </Button>
         </Modal.Actions>

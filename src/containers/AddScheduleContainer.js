@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { fetchtrainers } from "../ducks/trainers";
+import { fetchTrainers } from "../ducks/trainers";
 import { fetchClients } from "../ducks/clients";
 import { addSchedule } from "../ducks/schedules";
 import AddScheduleForm from "../components/AddScheduleForm";
@@ -14,7 +14,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onMount: () => {
       dispatch(fetchClients());
-      dispatch(fetchtrainers());
+      dispatch(fetchTrainers());
     },
     onAddSchedule: schedule => {
       dispatch(addSchedule(schedule));

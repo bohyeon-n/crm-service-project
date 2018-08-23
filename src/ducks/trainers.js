@@ -1,6 +1,6 @@
-const FETCH_trainer_REQUEST = "service/trainers/FETCH_trainer_REQUEST";
-const FETCH_trainer_SUCCESS = "service/trainers/FETCH_trainer_SUCCESS";
-const FETCH_trainer_FAILURE = "service/trainers/FETCH_trainer_FAILURE";
+const FETCH_TRAINER_REQUEST = "service/Trainers/FETCH_TRAINER_REQUEST";
+const FETCH_TRAINER_SUCCESS = "service/Trainers/FETCH_TRAINER_SUCCESS";
+const FETCH_TRAINER_FAILURE = "service/Trainers/FETCH_TRAINER_FAILURE";
 // mockup
 let trainers = [
   {
@@ -17,30 +17,30 @@ let trainers = [
   }
 ];
 
-export function fetchtrainerRequest() {
+export function fetchTrainerRequest() {
   return {
-    type: FETCH_trainer_REQUEST
+    type: FETCH_TRAINER_REQUEST
   };
 }
 
-export function fetchtrainerSuccess(trainers) {
+export function fetchTrainerSuccess(trainers) {
   return {
-    type: FETCH_trainer_SUCCESS,
+    type: FETCH_TRAINER_SUCCESS,
     trainers
   };
 }
 
-export function fetchtrainerFailure() {
+export function fetchTrainerFailure() {
   return {
-    type: FETCH_trainer_FAILURE
+    type: FETCH_TRAINER_FAILURE
   };
 }
 
-export function fetchtrainers() {
+export function fetchTrainers() {
   return function(dispatch) {
-    dispatch(fetchtrainerRequest());
+    dispatch(fetchTrainerRequest());
     const res = trainers;
-    dispatch(fetchtrainerSuccess(res));
+    dispatch(fetchTrainerSuccess(res));
   };
 }
 
@@ -52,18 +52,18 @@ const initialState = {
 
 export default function trainers(state = initialState, action) {
   switch (action.type) {
-    case FETCH_trainer_REQUEST:
+    case FETCH_TRAINER_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case FETCH_trainer_SUCCESS:
+    case FETCH_TRAINER_SUCCESS:
       return {
         ...state,
         loading: false,
         items: action.trainers
       };
-    case FETCH_trainer_FAILURE:
+    case FETCH_TRAINER_FAILURE:
       return {
         ...state,
         loading: false,
