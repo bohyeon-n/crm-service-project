@@ -1,5 +1,12 @@
 import React from "react";
-import { Modal, Button, Image, Header, Form } from "semantic-ui-react";
+import {
+  Modal,
+  Button,
+  Image,
+  Header,
+  Form,
+  Dropdown
+} from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import TimePicker from "rc-time-picker";
@@ -27,6 +34,11 @@ export default class AddScheduleForm extends React.Component {
   handleChangeTime = value => {
     this.setState({
       time: value
+    });
+  };
+  handleChangeClient = (e, { value }) => {
+    this.setState({
+      client: value
     });
   };
   handleSubmit = async e => {
@@ -67,32 +79,43 @@ export default class AddScheduleForm extends React.Component {
         <Modal.Header>ADD SCHEDULE</Modal.Header>
         <Modal.Content>
           <Form>
-            <Form.Field
-              width={5}
-              label="select trainer"
-              control="select"
-              name="trainer"
-              onChange={this.handleChange}
-              value={trainer}
-            >
-              {trainers.map(trainer => (
-                <option value={trainer.name}>{trainer.name}</option>
-              ))}
+            <Form.Field width={5}>
+              <Dropdown
+                placeholder="Choose a Trainer"
+                name="trainer"
+                onChange={(e, { value }) => {
+                  console.log(e);
+                  this.setState({
+                    trainer: value
+                  });
+                }}
+                selection
+                value={this.state.trainer}
+                options={trainers.map(trainer => ({
+                  key: trainer.id,
+                  value: trainer.name,
+                  text: trainer.name
+                }))}
+                search
+              />
             </Form.Field>
-            <Form.Field
-              width={5}
-              label="select client"
-              control="select"
-              name="client"
-              onChange={this.handleChange}
-              value={client}
-            >
-              {clients.map(client => (
-                <option key={client.id} value={client.name}>
-                  {client.name} / {client.trainingCount}
-                </option>
-              ))}
+            <Form.Field width={5}>
+              <label htmlFor="">Select a Client</label>
+              <Dropdown
+                placeholder="Choose a client"
+                name="client"
+                onChange={this.handleChangeClient}
+                selection
+                value={this.state.client}
+                options={clients.map(client => ({
+                  key: client.id,
+                  value: client.name,
+                  text: `${client.name} / ${client.count}`
+                }))}
+                search
+              />
             </Form.Field>
+
             <Form.Field>
               <label>select date</label>
               <DatePicker

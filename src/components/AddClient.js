@@ -16,7 +16,7 @@ export default class AddClient extends React.Component {
       injuries: "",
       condition: "",
       trainer: "",
-      trainingCount: 10
+      count: 10
     }
   };
   autoHypenPhone = str => {
@@ -65,7 +65,6 @@ export default class AddClient extends React.Component {
     if (name === "mobile") {
       value = this.autoHypenPhone(value);
     }
-    console.log(value);
     this.setState({
       client: {
         ...this.state.client,
@@ -126,7 +125,7 @@ export default class AddClient extends React.Component {
                 memos={client.memos}
                 activeItem={activeItem}
                 handleClientUpdate={this.onUpdateClient}
-                trainingCount={this.state.trainingCount}
+                count={this.state.count}
               />
             </Grid.Column>
           </Grid>

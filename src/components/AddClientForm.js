@@ -5,7 +5,7 @@ const statusOptions = [
   { key: "active", text: "Active Client", value: "active" },
   { key: "former", text: "Former Client", value: "former" }
 ];
-const trainingCountOptions = [
+const countOptions = [
   { key: 10, text: "10", value: 10 },
   { key: 20, text: "20", value: 20 },
   { key: 30, text: "30", value: 30 },
@@ -30,7 +30,7 @@ export default class AddClientForm extends React.Component {
       injuries,
       condition,
       trainer,
-      trainingCount
+      count
     } = this.props.client;
 
     const trainers = this.props.trainers || [];
@@ -85,10 +85,10 @@ export default class AddClientForm extends React.Component {
           <Form.Select
             label="트레이닝 횟수선택"
             type="number"
-            options={trainingCountOptions}
-            value={trainingCount}
+            options={countOptions}
+            value={count}
             placeholder="Number of training"
-            name="trainingCount"
+            name="count"
             onChange={this.handleChange}
           />
         </Form>
