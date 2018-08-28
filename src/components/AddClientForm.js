@@ -82,10 +82,9 @@ export default class AddClientForm extends React.Component {
               </option>
             ))}
           </Form.Field>
-          <Form.Select
+          <Form.Input
             label="트레이닝 횟수선택"
             type="number"
-            options={countOptions}
             value={count}
             placeholder="Number of training"
             name="count"

@@ -16,7 +16,8 @@ const format = "h:mm a";
 export default class AddScheduleForm extends React.Component {
   state = {
     client: "",
-    trainer: ""
+    trainer: "",
+    message: false
   };
   componentDidMount() {
     this.props.onMount && this.props.onMount();
@@ -59,6 +60,7 @@ export default class AddScheduleForm extends React.Component {
     const schedule = {
       client: client,
       trainer: trainer,
+      message: this.state.message,
       start: moment(date).toDate(),
       end: moment(date)
         .add(1, "hours")
@@ -73,11 +75,11 @@ export default class AddScheduleForm extends React.Component {
     const start = this.state.start || this.props.start;
     const end = this.state.end || this.props.end;
     const now = moment(start);
-    const { trainer, client } = this.state;
+    const { trainer, client, message } = this.state;
     return (
       <Modal open={open} onClose={close}>
         <Modal.Header>ADD SCHEDULE</Modal.Header>
-        <Modal.Content>
+        <Modal.Content scrolling>
           <Form>
             <Form.Field width={5}>
               <Dropdown
@@ -136,6 +138,29 @@ export default class AddScheduleForm extends React.Component {
                 className="time-picker"
               />
             </Form.Field>
+            <Form.Group>
+              <label>예약 완료 메시지를 보내겠습니까?</label>
+              <Form.Radio
+                label="yes"
+                value={true}
+                checked={message === true}
+                onChange={(e, { value }) => {
+                  this.setState({
+                    message: true
+                  });
+                }}
+              />
+              <Form.Radio
+                label="no"
+                value={false}
+                checked={message === false}
+                onChange={(e, { value }) => {
+                  this.setState({
+                    message: false
+                  });
+                }}
+              />
+            </Form.Group>
           </Form>
         </Modal.Content>
         <Modal.Actions>

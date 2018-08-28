@@ -1,6 +1,6 @@
 import React from "react";
 import BigCalendar from "react-big-calendar";
-
+// import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop/";
 import { Segment, Modal, Popup, Icon } from "semantic-ui-react";
 import moment from "moment";
 import AddScheduleContainer from "../containers/AddScheduleContainer";

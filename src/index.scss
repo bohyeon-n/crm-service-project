@@ -2,7 +2,6 @@
     height: 4rem;
     &__content {
         position: fixed;
-        top: 0;
         background: red;
         display: flex;
         align-items: center;
@@ -26,4 +25,201 @@
     flex: 100px;
     overflow: hidden;
     height: 100%;
+}
+
+@keyframes zoomin {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(30px);
+    }
+    80% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes flip {
+    0% {
+        height: 0;
+        overflow: hidden;
+    }
+    100% {
+        height: 10rem;
+        overflow: hidden;
+    }
+}
+
+.home {
+    &__header {
+        z-index: 999;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 5rem;
+        background: darksalmon;
+        align-items: center;
+        &-logo {
+            background: cadetblue;
+        }
+        &-menu {
+            background: darkgray;
+            ul {
+                background: gold;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                li {
+                    color: #fff;
+                    background: green;
+                    padding: 0 0.5rem;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    &__main {
+        margin-top: 5rem;
+        &-top {
+            animation-name: fadein;
+            animation-duration: 1s;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url("https://images.unsplash.com/photo-1485988412941-77a35537dae4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c9476459aede4e37dbbf9a2153d6377c&auto=format&fit=crop&w=1972&q=80");
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 95vh;
+            &-content {
+                box-sizing: border-box;
+                background: blueviolet;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .box {
+                    transform: scale(0);
+                    width: 25rem;
+                    height: 20rem;
+                    animation-name: zoomin;
+                    animation-timing-function: ease-in-out;
+                    animation-delay: 1s;
+                    animation-duration: 0.3s;
+                    animation-fill-mode: forwards;
+                    font-size: 1.5rem;
+                    background: antiquewhite;
+                    text-align: center;
+                }
+                .button {
+                    opacity: 0;
+                    text-align: center;
+                    animation-name: bounceInDown;
+                    animation-duration: 1s;
+                    animation-delay: 2s;
+                    animation-fill-mode: forwards;
+                }
+            }
+        }
+        &-mid {
+            padding: 5rem 0;
+            .box1 {
+                .title {
+                    font-size: 2rem;
+                    font-weight: bold;
+                    p {
+                        margin: 0;
+                    }
+                    &::after {
+                        content: "";
+                        width: 3rem;
+                        height: 0.3rem;
+                        display: block;
+                        background: blue;
+                        margin-bottom: 1rem;
+                    }
+                }
+                .desc {
+                    width: 20rem;
+                    height: 10rem;
+                    background: antiquewhite;
+                    position: relative;
+                    z-index: 2;
+                }
+            }
+            .box2 {
+                .title {
+                    background: aqua;
+                    height: 2rem;
+                    border: 1px solid black;
+                }
+                .desc {
+                    &_active {
+                        height: 0;
+                        overflow: hidden;
+                        animation-name: flip;
+                        animation-duration: 1s;
+                        animation-fill-mode: forwards;
+                        background: palevioletred;
+                    }
+                    height: 0;
+                    overflow: hidden;
+                }
+            }
+        }
+        .mid-bottom {
+            height: 10rem;
+            background: olivedrab;
+        }
+        &-mid2 {
+            height: 92vh;
+            background: moccasin;
+            .top {
+                height: 20%;
+                background: mediumslateblue;
+                font-size: 1.5rem;
+                text-align: center;
+                margin: auto;
+            }
+            .content {
+                .grid {
+                    width: 100%;
+                    margin: auto;
+                }
+                background: mediumaquamarine;
+                .hey {
+                    width: 100%;
+                    background: lightgray;
+                    padding: 1rem;
+                    .hi {
+                        width: 50%;
+                        background: lightsteelblue;
+                    }
+                }
+            }
+        }
+    }
 }

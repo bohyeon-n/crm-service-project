@@ -6,6 +6,7 @@ import ClientPage from "./pages/ClientPage";
 import JoinPage from "./pages/JoinPage";
 import LoginPage from "./pages/LoginPage";
 import CalendarPage from "./pages/CalendarPage";
+import HomePage from "./pages/HomePage";
 import { Provider } from "react-redux";
 import { store } from "./store";
 
@@ -15,6 +16,7 @@ export default class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
+            <Route exact path="/" component={HomePage} />
             <Route path="/clients" component={ClientPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/join" component={JoinPage} />
