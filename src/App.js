@@ -10,6 +10,11 @@ import HomePage from "./pages/HomePage";
 import { Provider } from "react-redux";
 import { store } from "./store";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCalendarCheck, faUsers } from "@fortawesome/free-solid-svg-icons";
+library.add(faCalendarCheck, faUsers);
+
 export default class App extends Component {
   render() {
     return (

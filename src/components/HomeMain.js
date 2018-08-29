@@ -1,18 +1,53 @@
 import React from "react";
 import { Button, Grid, Image, Container } from "semantic-ui-react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+const features = [
+  {
+    title: "스케줄 관리",
+    body: "스케줄을 관리할 수 있습니다.",
+    icon: "calendar-check"
+  },
+  {
+    title: "고객 관리",
+    body: "고객을 등록하고 관리할 수 있습니다. ",
+    icon: "users"
+  },
+  {
+    title: "알림기능",
+    body: "스케줄이 변경, 취소되셨다면 고객에게 변경 사항을 알릴 수 있습니다. ",
+    icon: "users"
+  },
+  {
+    title: "알림기능",
+    body: "스케줄이 변경, 취소되셨다면 고객에게 변경 사항을 알릴 수 있습니다. ",
+    icon: "users"
+  },
+  {
+    title: "알림기능",
+    body: "스케줄이 변경, 취소되셨다면 고객에게 변경 사항을 알릴 수 있습니다. ",
+    icon: "users"
+  },
+  {
+    title: "알림기능",
+    body: "스케줄이 변경, 취소되셨다면 고객에게 변경 사항을 알릴 수 있습니다. ",
+    icon: "users"
+  }
+];
 export default class HomeMain extends React.Component {
   state = {
-    activeTitle: "title1"
+    width: window.innerWidth
   };
-  handleTitle = title => {
-    this.setState({
-      activeTitle: title
-    });
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+  componentWillUnMount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
   };
   render() {
-    const { activeTitle } = this.state;
-
+    const isPc = this.state.width > 961;
     return (
       <React.Fragment>
         <div className="home__main">
@@ -29,11 +64,11 @@ export default class HomeMain extends React.Component {
             </div>
           </div>
           <Container className="home__main-mid">
-            <Grid columns="equal" divided>
-              <Grid.Column className="box1">
+            <Grid>
+              <Grid.Column className="box">
                 <Grid columns="equal">
                   <Grid.Row stretched>
-                    <Grid.Column>
+                    <Grid.Column computer={6} mobile={16}>
                       <div className="title">
                         <p>WHAT IS</p>
                         <p>PTPT?</p>
@@ -43,7 +78,7 @@ export default class HomeMain extends React.Component {
                         서비스입니다.
                       </div>
                     </Grid.Column>
-                    <Grid.Column className="media" width={10}>
+                    <Grid.Column className="media" computer={10} mobile={16}>
                       <Image
                         src="https://images.unsplash.com/photo-1507361617237-221d9f2c84f7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ef76b0e87e41db45864b06e0166bee47&auto=format&fit=crop&w=1706&q=80"
                         alt=""
@@ -51,63 +86,6 @@ export default class HomeMain extends React.Component {
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>
-              </Grid.Column>
-
-              <Grid.Column>
-                <div className="box2">
-                  <div className="content">
-                    <div className="content1">
-                      <div
-                        className="title"
-                        onClick={e => this.handleTitle("title1")}
-                      >
-                        시간을 절약하세요
-                      </div>
-
-                      <div
-                        className={
-                          "desc" + (activeTitle === "title1" ? "_active" : "")
-                        }
-                      >
-                        당신은 고객과 트레이닝에만 집중하세요. 관리는 ptpt가
-                        맡겠습니다. ptpt는 당신의 시간과 돈을 절약해드립니다.
-                      </div>
-                    </div>
-                    <div className="content2">
-                      <div
-                        className="title"
-                        onClick={e => this.handleTitle("title2")}
-                      >
-                        언제, 어디서나 접근할 수 있습니다.
-                      </div>
-
-                      <div
-                        className={
-                          "desc" + (activeTitle === "title2" ? "_active" : "")
-                        }
-                      >
-                        언제 어디서나 로그인할 수 있습니다. 쉽고 똑똑하고
-                        간단하게 접근할 수 있습니다.
-                      </div>
-                    </div>
-                    <div className="content3">
-                      <div
-                        className="title"
-                        onClick={e => this.handleTitle("title3")}
-                      >
-                        사용하기 쉽게 만들었습니다.
-                      </div>
-
-                      <div
-                        className={
-                          "desc" + (activeTitle === "title3" ? "_active" : "")
-                        }
-                      >
-                        필수 기능은 제공하면서 사용하기 쉽게 만들었습니다.
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </Grid.Column>
             </Grid>
           </Container>
@@ -122,95 +100,103 @@ export default class HomeMain extends React.Component {
                 <div className="desc">주요 기능입니다.</div>
               </div>
               <div className="content">
-                <Grid columns={2} divided className="grid">
-                  <Grid.Row className="hey">
-                    <Grid.Column className="hi">
-                      <Grid>
-                        <Grid.Row stretched>
-                          <Grid.Column>
-                            <div className="title">title</div>
-                            <div className="desc">desc</div>
-                          </Grid.Column>
-                          <Grid.Column>
-                            <div className="icon">icon</div>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Grid>
-                        <Grid.Row stretched>
-                          <Grid.Column>
-                            <div className="title">title</div>
-                            <div className="desc">desc</div>
-                          </Grid.Column>
-                          <Grid.Column>
-                            <div className="icon">icon</div>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                    </Grid.Column>
-                  </Grid.Row>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Grid>
-                        <Grid.Row stretched>
-                          <Grid.Column>
-                            <div className="title">title</div>
-                            <div className="desc">desc</div>
-                          </Grid.Column>
-                          <Grid.Column>
-                            <div className="icon">icon</div>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Grid>
-                        <Grid.Row stretched>
-                          <Grid.Column>
-                            <div className="title">title</div>
-                            <div className="desc">desc</div>
-                          </Grid.Column>
-                          <Grid.Column>
-                            <div className="icon">icon</div>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                    </Grid.Column>
-                  </Grid.Row>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Grid>
-                        <Grid.Row stretched>
-                          <Grid.Column>
-                            <div className="title">title</div>
-                            <div className="desc">desc</div>
-                          </Grid.Column>
-                          <Grid.Column>
-                            <div className="icon">icon</div>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Grid>
-                        <Grid.Row stretched>
-                          <Grid.Column>
-                            <div className="title">title</div>
-                            <div className="desc">desc</div>
-                          </Grid.Column>
-                          <Grid.Column>
-                            <div className="icon">icon</div>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                    </Grid.Column>
-                  </Grid.Row>
+                <Grid columns={2} divided className="feature">
+                  {Array(3)
+                    .fill(1)
+                    .map((x, i) => (
+                      <Grid.Row className="feature__row">
+                        <Grid.Column
+                          className="feature__column"
+                          computer={8}
+                          mobile={16}
+                        >
+                          <Grid>
+                            {!isPc ? (
+                              <Grid.Row stretched>
+                                <Grid.Column width={3}>
+                                  <div className="icon">
+                                    <FontAwesomeIcon
+                                      icon={features[i].icon}
+                                      size="3x"
+                                    />
+                                  </div>
+                                </Grid.Column>
+                                <Grid.Column width={13}>
+                                  <div className="title">
+                                    {features[i].title}{" "}
+                                  </div>
+                                  <div className="desc">{features[i].body}</div>
+                                </Grid.Column>
+                              </Grid.Row>
+                            ) : (
+                              <Grid.Row stretched>
+                                <Grid.Column width={13}>
+                                  <div className="title">
+                                    {features[i].title}{" "}
+                                  </div>
+                                  <div className="desc">{features[i].body}</div>
+                                </Grid.Column>
+                                <Grid.Column width={3}>
+                                  <div className="icon">
+                                    <FontAwesomeIcon
+                                      icon={features[i].icon}
+                                      size="3x"
+                                    />
+                                  </div>
+                                </Grid.Column>
+                              </Grid.Row>
+                            )}
+                          </Grid>
+                        </Grid.Column>
+                        <Grid.Column
+                          className="feature__column"
+                          computer={8}
+                          mobile={16}
+                        >
+                          <Grid>
+                            <Grid.Row stretched>
+                              <Grid.Column width={3}>
+                                <div className="icon">
+                                  <FontAwesomeIcon
+                                    icon={features[i + 1].icon}
+                                    size="3x"
+                                  />
+                                </div>
+                              </Grid.Column>
+                              <Grid.Column width={13}>
+                                <div className="title">
+                                  {features[i + 1].title}
+                                </div>
+                                <div className="desc">
+                                  {features[i + 1].body}
+                                </div>
+                              </Grid.Column>
+                            </Grid.Row>
+                          </Grid>
+                        </Grid.Column>
+                      </Grid.Row>
+                    ))}
                 </Grid>
               </div>
             </div>
           </Container>
+
+          <div className="home__footer">
+            <Grid>
+              <Grid.Column computer={8} mobile={16}>
+                <div className="title">ptpt</div>
+                <div className="body">
+                  ptpt는 여러분의 의견을 기다리고 있습니다. 언제든지 ptpt에
+                  연락해주세요. 당신의 personal training 사업을 돕겠습니다.
+                </div>
+              </Grid.Column>
+              <Grid.Column>
+                <div className="contact" computer={8} mobile={16}>
+                  contact
+                </div>
+              </Grid.Column>
+            </Grid>
+          </div>
         </div>
       </React.Fragment>
     );

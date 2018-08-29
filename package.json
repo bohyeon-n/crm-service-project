@@ -4,12 +4,18 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
+    "@fortawesome/fontawesome-free": "^5.3.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "@fortawesome/react-fontawesome": "^0.1.2",
     "formik": "^1.0.2",
     "moment": "^2.22.2",
     "rc-time-picker": "^3.4.0",
     "react": "^16.4.2",
     "react-big-calendar": "^0.19.2",
     "react-datepicker": "^1.6.0",
+    "react-dnd": "^2.6.0",
+    "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
@@ -19,9 +25,7 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.2",
-    "yup": "^0.24.1",
-    "react-dnd": "^2.6.0",
-    "react-dnd-html5-backend": "^2.6.0"
+    "yup": "^0.24.1"
   },
   "scripts": {
     "start": "react-scripts start",
