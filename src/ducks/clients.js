@@ -13,7 +13,8 @@ clients = [
     mobile: "01055992807",
     status: "active",
     trainerId: 1,
-    count: 10
+    count: 10,
+    memos: []
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ clients = [
     mobile: "01055992807",
     status: "former",
     trainerId: 2,
-    count: 10
+    count: 10,
+    memos: []
   }
 ];
 // fetchClients

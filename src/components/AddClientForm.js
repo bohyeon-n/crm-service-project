@@ -12,28 +12,42 @@ const countOptions = [
   { key: 50, text: "50", value: 50 },
   { key: 100, text: "100", value: 100 }
 ];
+let countMove = {
+  name: true,
+  mobile: true,
+  status: true,
+  goal: true,
+  injuries: true,
+  trainer: true,
+  count: true,
+  memos: true,
+  memo: true,
+  condition: true
+};
 const date = moment().format("MMM Do YYYY");
 export default class AddClientForm extends React.Component {
   handleChange = (e, { name, value }) => {
     const { handleClientUpdate } = this.props;
     handleClientUpdate(name, value);
+    countMove[name] = false;
   };
   render() {
     const { activeItem } = this.props;
     const {
-      memo,
-      memos,
       name,
       mobile,
       status,
       goal,
       injuries,
-      condition,
       trainer,
-      count
+      count,
+      memo,
+      condition
     } = this.props.client;
 
+    const { memos } = this.props.client || [];
     const trainers = this.props.trainers || [];
+    console.log(trainers);
     return activeItem === "Info" ? (
       <React.Fragment>
         <Header as="h4" block>
@@ -45,7 +59,7 @@ export default class AddClientForm extends React.Component {
             label="Name"
             placeholder="Name"
             name="name"
-            value={name}
+            value={name || ""}
             onChange={this.handleChange}
           />
 
@@ -54,7 +68,7 @@ export default class AddClientForm extends React.Component {
             label="Mobile"
             placeholder="Mobile"
             name="mobile"
-            value={mobile}
+            value={mobile || ""}
             onChange={this.handleChange}
           />
 
@@ -63,13 +77,13 @@ export default class AddClientForm extends React.Component {
             label="Client Status"
             placeholder="Client Status"
             options={statusOptions}
-            value={status}
+            value={status || ""}
             onChange={this.handleChange}
           />
           <Form.Field
             name="trainer"
             label="Select Trainer"
-            value={trainer}
+            value={trainer || ""}
             control="select"
             onChange={e => {
               const params = { name: e.target.name, value: e.target.value };
@@ -85,7 +99,7 @@ export default class AddClientForm extends React.Component {
           <Form.Input
             label="트레이닝 횟수선택"
             type="number"
-            value={count}
+            value={count || ""}
             placeholder="Number of training"
             name="count"
             onChange={this.handleChange}

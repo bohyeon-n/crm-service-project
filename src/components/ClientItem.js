@@ -1,9 +1,18 @@
 import React from "react";
 import { Table, Button } from "semantic-ui-react";
+import AddClientContainer from "../containers/AddClientContainer";
 
 export default class ClientItem extends React.Component {
+  state = {
+    click: false
+  };
+  handleClick = () => {
+    this.setState({
+      click: false
+    });
+  };
   render() {
-    const { id, name, mobile } = this.props;
+    const { id, name, mobile } = this.props.client;
     return (
       <Table.Row>
         <Table.Cell>
@@ -16,7 +25,20 @@ export default class ClientItem extends React.Component {
           <Button>summary</Button>
         </Table.Cell>
         <Table.Cell>
-          <Button>edit</Button>
+          {this.state.click ? (
+            <AddClientContainer
+              edit={true}
+              client={this.props.client}
+              handleClick={this.handleClick}
+            />
+          ) : null}
+          <button
+            onClick={e => {
+              this.setState({ click: true });
+            }}
+          >
+            edit
+          </button>
         </Table.Cell>
       </Table.Row>
     );

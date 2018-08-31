@@ -33,21 +33,10 @@ const features = [
     icon: "users"
   }
 ];
+
 export default class HomeMain extends React.Component {
-  state = {
-    width: window.innerWidth
-  };
-  componentWillMount() {
-    window.addEventListener("resize", this.handleWindowSizeChange);
-  }
-  componentWillUnMount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);
-  }
-  handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
-  };
   render() {
-    const isPc = this.state.width > 961;
+    const { isPc } = this.props;
     return (
       <React.Fragment>
         <div className="home__main">
@@ -92,7 +81,26 @@ export default class HomeMain extends React.Component {
           <div className="mid-bottom">
             FOR PERSONAL TRAINERS, STUDIOS & GYMS
           </div>
-
+          <div className="home__main-features">
+            <div className="content picture1">
+              <div className="text">
+                <div className="title">기능입니다.</div>
+                <div className="body">~할 수 있습니다.</div>
+              </div>
+            </div>
+            <div className="content picture2">
+              <div className="text">
+                <div className="title">기능입니다.</div>
+                <div className="body">~할 수 있습니다.</div>
+              </div>
+            </div>
+            <div className="content picture3">
+              <div className="text">
+                <div className="title">기능입니다.</div>
+                <div className="body">~할 수 있습니다.</div>
+              </div>
+            </div>
+          </div>
           <Container>
             <div className="home__main-mid2">
               <div className="top">

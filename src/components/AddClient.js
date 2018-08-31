@@ -4,21 +4,23 @@ import { Grid, Modal, Button, Menu } from "semantic-ui-react";
 import AddClientForm from "./AddClientForm";
 export default class AddClient extends React.Component {
   state = {
-    open: false,
+    open: true,
+    update: false,
     activeItem: "Info",
     client: {
       memo: "",
       memos: [],
       name: "",
       mobile: "",
-      status: "active",
+      status: "",
       goal: "",
       injuries: "",
       condition: "",
       trainer: "",
-      count: 10
+      count: null
     }
   };
+
   autoHypenPhone = str => {
     str = str.replace(/[^0-9]/g, "");
     const length = str.length;
@@ -76,6 +78,12 @@ export default class AddClient extends React.Component {
   componentDidMount() {
     this.props.onMount && this.props.onMount();
   }
+  updateState = async client => {
+    await this.setState({
+      client: client,
+      update: true
+    });
+  };
   render() {
     const {
       open,
@@ -85,16 +93,21 @@ export default class AddClient extends React.Component {
       client
     } = this.state;
     const { onAddClient, trainers } = this.props;
-
+    const clickedClient = this.props.client;
+    if (clickedClient && !this.state.update) {
+      this.updateState(clickedClient);
+    }
+    console.log(this.props.clickedClient);
+    console.log(this.props.edit);
     return (
       <Modal
         size="large"
         open={open}
-        trigger={
-          <Button onClick={e => this.setState({ open: true })}>
-            ADD CLIENT
-          </Button>
-        }
+        // trigger={
+        //   <Button onClick={e => this.setState({ open: true })}>
+        //     {this.props.edit ? "EDIT CLIENT" : "ADD CLIENT"}
+        //   </Button>
+        // }
       >
         <Modal.Header>ADD CLIENT</Modal.Header>
         <Modal.Content style={{ height: "80vh" }} scrolling>
@@ -126,17 +139,41 @@ export default class AddClient extends React.Component {
                 activeItem={activeItem}
                 handleClientUpdate={this.onUpdateClient}
                 count={this.state.count}
+                clickedClient={clickedClient}
               />
             </Grid.Column>
           </Grid>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.close} negative>
+          <Button
+            onClick={e => {
+              this.close();
+              this.props.handleClick();
+            }}
+            negative
+          >
             close
           </Button>
-          <Button onClick={this.handleSubmit} positive labelPosition="right">
-            Add Client
-          </Button>
+          {this.props.edit ? (
+            <Button
+              labelPosition="right"
+              onClick={e => {
+                this.props.handleClick();
+              }}
+            >
+              EDIT CLIENT
+            </Button>
+          ) : (
+            <Button
+              onClick={e => {
+                this.handleSubmit();
+                this.props.handleClick();
+              }}
+              labelPosition="right"
+            >
+              ADD CLIENT
+            </Button>
+          )}
         </Modal.Actions>
       </Modal>
     );

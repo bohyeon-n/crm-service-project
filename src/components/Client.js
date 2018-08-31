@@ -20,8 +20,14 @@ export default class Client extends React.Component {
     activeItem: "active",
     isLoading: false,
     value: "",
+    click: false,
 
     clients: []
+  };
+  handleClick = e => {
+    this.setState({
+      click: false
+    });
   };
   resetComponent = () =>
     this.setState({ isLoading: false, results: [], value: "" });
@@ -118,7 +124,22 @@ export default class Client extends React.Component {
                 value={value}
                 showNoResults={false}
               />
-              <AddClientContainer />
+              {this.state.click ? (
+                <AddClientContainer
+                  edit={false}
+                  handleClick={this.handleClick}
+                />
+              ) : null}
+
+              <button
+                onClick={e =>
+                  this.setState({
+                    click: true
+                  })
+                }
+              >
+                click
+              </button>
             </Menu>
           </Menu>
         </div>

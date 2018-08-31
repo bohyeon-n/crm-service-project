@@ -70,6 +70,7 @@ $mq-mobile-landscape: 500px !default;
     background: darksalmon;
     align-items: center;
     &-logo {
+      padding-left: 2rem;
       background: cadetblue;
     }
     &-menu {
@@ -93,7 +94,10 @@ $mq-mobile-landscape: 500px !default;
     &-top {
       background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)),
         url("https://images.unsplash.com/photo-1485988412941-77a35537dae4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c9476459aede4e37dbbf9a2153d6377c&auto=format&fit=crop&w=1972&q=80");
-      background-size: cover;
+      background-size: 100% 100%;
+      @include mobile-only {
+        background-size: cover;
+      }
       display: flex;
       align-items: center;
       justify-content: center;
@@ -184,5 +188,81 @@ $mq-mobile-landscape: 500px !default;
   &__footer {
     height: 50vh;
     background: beige;
+  }
+}
+
+// 사진
+.home__main-features {
+  .content {
+    height: 35rem;
+    display: flex;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 70% 35rem !important;
+    background-color: black !important;
+    @include mobile-only {
+      height: 25rem;
+      background-size: 100% 25rem !important;
+    }
+    .text {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      line-height: 3rem;
+      padding: 1rem;
+      @include bp-pc {
+        line-height: 5rem;
+        justify-content: center;
+        align-items: center;
+      }
+      .title {
+        font-size: 2rem;
+        color: #fff;
+        font-weight: 100;
+        @include bp-pc {
+          font-size: 3rem;
+        }
+      }
+      .body {
+        font-size: 1.5rem;
+        @include bp-pc {
+          font-size: 2rem;
+        }
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+    &.picture1 {
+      background: linear-gradient(to right, transparent, rgb(0, 0, 0)),
+        url("https://images.unsplash.com/photo-1527701758614-2b486f8c0d29?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=183cffa294bb2fdfa59612596892a57c&auto=format&fit=crop&w=1568&q=80")
+          no-repeat;
+      .text {
+        @include bp-pc {
+          padding-left: 50rem;
+        }
+      }
+    }
+    &.picture2 {
+      background-position: right !important;
+      background: linear-gradient(to left, transparent, rgb(0, 0, 0)),
+        url("https://images.unsplash.com/photo-1518622358385-8ea7d0794bf6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=42226a7bf3b99eec89267859b4f36114&auto=format&fit=crop&w=800&q=60")
+          no-repeat;
+      @include bp-pc {
+        .text {
+          padding-right: 50rem;
+        }
+      }
+    }
+    &.picture3 {
+      background: linear-gradient(to right, transparent, rgb(0, 0, 0)),
+        url("https://images.unsplash.com/photo-1518644961665-ed172691aaa1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a66ec42c82189ef3542106eff7012497&auto=format&fit=crop&w=1950&q=80")
+          no-repeat;
+      @include bp-pc {
+        .text {
+          padding-left: 50rem;
+        }
+      }
+    }
   }
 }
