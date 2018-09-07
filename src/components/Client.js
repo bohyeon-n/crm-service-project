@@ -138,7 +138,7 @@ export default class Client extends React.Component {
                   })
                 }
               >
-                click
+                ADD CLIENT
               </button>
             </Menu>
           </Menu>

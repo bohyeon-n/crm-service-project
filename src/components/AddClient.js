@@ -59,7 +59,9 @@ export default class AddClient extends React.Component {
         });
       }
     } else {
-      this.props.onAddClient(this.state.client);
+      this.props.edit
+        ? this.props.onEditClient(this.state.client.id, this.state.client)
+        : this.props.onAddClient(this.state.client);
       this.close();
     }
   };
@@ -158,6 +160,7 @@ export default class AddClient extends React.Component {
             <Button
               labelPosition="right"
               onClick={e => {
+                this.handleSubmit();
                 this.props.handleClick();
               }}
             >

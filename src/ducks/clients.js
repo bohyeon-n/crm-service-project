@@ -4,6 +4,10 @@ const FETCH_CLIENTS_FAILURE = "service/clients/FETCH_CLIENTS_FAILURE";
 const ADD_CLIENTS_REQUEST = "service/clients/ADD_CLIENTS_REQUEST";
 const ADD_CLIENTS_SUCCESS = "service/clients/ADD_CLIENTS_SUCCESS";
 const ADD_CLIENTS_FAILURE = "service/clients/ADD_CLIENTS_FAILURE";
+const EDIT_CLIENTS_REQUEST = "service/clients/EDIT_CLIENTS_REQUEST";
+const EDIT_CLIENTS_SUCCESS = "service/clients/EDIT_CLIENTS_SUCCESS";
+const EDIT_CLIENTS_FAILURE = "service/clients/EDIT_CLIENTS_FAILURE";
+
 // mockup
 let count = 2;
 clients = [
@@ -18,7 +22,7 @@ clients = [
   },
   {
     id: 2,
-    name: "sewoon123",
+    name: "jahyeon",
     mobile: "01055992807",
     status: "former",
     trainerId: 2,
@@ -62,6 +66,23 @@ export function addClientFailure(errorMsg) {
     errorMsg
   };
 }
+//edit clients
+export function editClientRequest() {
+  return {
+    type: EDIT_CLIENTS_REQUEST
+  };
+}
+export function editClientSuccess() {
+  return {
+    type: EDIT_CLIENTS_SUCCESS
+  };
+}
+export function editClientFailure(errorMsg) {
+  return {
+    type: editClientFailure,
+    errorMsg
+  };
+}
 export function fetchClients() {
   return function(dispatch) {
     // 통신 보내기
@@ -74,6 +95,15 @@ export function addClient(client) {
   return function(dispatch) {
     dispatch(addClientRequest());
     clients = [...clients, client];
+    dispatch(addClientSuccess());
+    dispatch(fetchClients());
+  };
+}
+export function editClient(id, payload) {
+  console.log(id, payload);
+  return function(dispatch) {
+    dispatch(addClientRequest());
+    // request
     dispatch(addClientSuccess());
     dispatch(fetchClients());
   };
@@ -117,6 +147,22 @@ export default function clients(state = initialState, action) {
       return {
         loading: false,
         ...state,
+        errorMsg: action.errorMsg
+      };
+    case EDIT_CLIENTS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case EDIT_CLIENTS_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case EDIT_CLIENTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
         errorMsg: action.errorMsg
       };
     default:

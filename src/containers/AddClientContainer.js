@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { addClient } from "../ducks/clients";
+import { addClient, editClient } from "../ducks/clients";
 import { fetchTrainers } from "../ducks/trainers";
 import AddClient from "../components/AddClient";
 
@@ -15,6 +15,9 @@ function mapDispatchToprops(dispatch) {
     },
     onAddClient: client => {
       dispatch(addClient(client));
+    },
+    onEditClient: (id, payload) => {
+      dispatch(editClient(id, payload));
     }
   };
 }
